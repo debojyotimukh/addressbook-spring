@@ -30,7 +30,7 @@ public class AddressBookController {
     @Autowired
     private IAddressBookService addressBookService;
 
-    @GetMapping(value = {"","/","/contacts"})
+    @GetMapping(value = { "", "/", "/contacts" })
     public ResponseEntity<ResponseDTO> getAllContacts() {
         List<Contact> contactList = addressBookService.getAllContacts();
         ResponseDTO responseDTO = new ResponseDTO("Get call sucessful", contactList);
@@ -38,7 +38,7 @@ public class AddressBookController {
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "contacts/{id}")
     public ResponseEntity<ResponseDTO> getContactById(@PathVariable("id") long Id) {
         Contact contact = addressBookService.getContactById(Id);
         ResponseDTO responseDTO = new ResponseDTO("Get call sucessful", contact);
@@ -55,7 +55,8 @@ public class AddressBookController {
     }
 
     @PutMapping(value = "update/{id}")
-    public ResponseEntity<ResponseDTO> updateContactById(@PathVariable("id") Long id, @RequestBody ContactDTO contactDTO) {
+    public ResponseEntity<ResponseDTO> updateContactById(@PathVariable("id") Long id,
+            @RequestBody ContactDTO contactDTO) {
         addressBookService.updateContactById(id, contactDTO);
         Contact updatedContact = addressBookService.getContactById(id);
         ResponseDTO responseDTO = new ResponseDTO("Contact update sucessful", updatedContact);
