@@ -1,8 +1,5 @@
 package com.bridgelabz.addressbook.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.util.Arrays;
 
 import com.bridgelabz.addressbook.model.Contact;
@@ -16,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @WebMvcTest(controllers = AddressBookController.class)
@@ -42,7 +42,8 @@ public class AddressBookControllerTest {
 
         Mockito.when(addressBookService.getAllContacts()).thenReturn(Arrays.asList(contact1, contact2));
 
-        mockMvc.perform(get("/addressbookservice/")).andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/contacts/")).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
 }
