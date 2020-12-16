@@ -35,10 +35,10 @@ public class AddressBookControllerTest {
     @Test
     @DisplayName("Should list all contacts when GET call made")
     public void givenContacts_whenGetCalled_shouldReturnContactList() throws Exception {
-        Contact contact1 = new Contact(1l, "Peter", "Parker", "gjfg kfg", "Howrah", "West Bengal", "4578963780",
-                "hjdfhd@gmail.com");
-        Contact contact2 = new Contact(2l, "Stephen", "Strange", "kkml", "Bengaluru", "Karnataka", "7894561230",
-                "tyu.gfg@gmail.co.in");
+        Contact contact1 = new Contact(1l, "Peter", "Parker", "gjfg kfg", "Howrah", "West Bengal", "112445",
+                "4578963780", "hjdfhd@gmail.com");
+        Contact contact2 = new Contact(2l, "Stephen", "Strange", "kkml", "Bengaluru", "Karnataka", "852369",
+                "7894561230", "tyu.gfg@gmail.co.in");
 
         Mockito.when(addressBookService.getAllContacts()).thenReturn(Arrays.asList(contact1, contact2));
 

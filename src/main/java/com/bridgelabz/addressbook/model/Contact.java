@@ -26,6 +26,7 @@ public @Data class Contact {
     private String address;
     private String city;
     private String state;
+    private String zip;
     private String phone;
     private String email;
 
@@ -35,6 +36,7 @@ public @Data class Contact {
         this.address = contactDTO.getAddress();
         this.city = contactDTO.getCity();
         this.state = contactDTO.getState();
+        this.zip = contactDTO.getZip();
         this.phone = contactDTO.getPhone();
         this.email = contactDTO.getEmail();
     }
