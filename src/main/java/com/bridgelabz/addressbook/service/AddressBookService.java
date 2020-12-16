@@ -1,8 +1,10 @@
 package com.bridgelabz.addressbook.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.bridgelabz.addressbook.dto.ContactDTO;
+import com.bridgelabz.addressbook.exception.AddressBookException;
 import com.bridgelabz.addressbook.model.Contact;
 import com.bridgelabz.addressbook.repository.AddressBookRepo;
 
@@ -23,8 +25,11 @@ public class AddressBookService implements IAddressBookService {
 
     @Override
     public Contact getContactById(long id) {
-        // TODO exception if not present
-        return addressRepository.findById(id).get();
+
+        Optional<Contact> contactOptional = addressRepository.findById(id);
+        if (contactOptional.isEmpty())
+            throw new AddressBookException("Contact does not exists!");
+        return contactOptional.get();
     }
 
     @Override
@@ -35,7 +40,10 @@ public class AddressBookService implements IAddressBookService {
 
     @Override
     public boolean updateContactById(long id, ContactDTO contactDTO) {
-        // TODO exception if not present
+        Optional<Contact> contactOptional = addressRepository.findById(id);
+        if (contactOptional.isEmpty())
+            throw new AddressBookException("Contact does not exists!");
+
         Contact contact = addressRepository.getOne(id);
         contact.setFirstName(contactDTO.getFirstName());
         contact.setLastName(contactDTO.getLastName());
@@ -51,7 +59,10 @@ public class AddressBookService implements IAddressBookService {
 
     @Override
     public boolean deleteContactById(long id) {
-        // TODO exception if not present
+        Optional<Contact> contactOptional = addressRepository.findById(id);
+        if (contactOptional.isEmpty())
+            throw new AddressBookException("Contact does not exists!");
+
         addressRepository.deleteById(id);
         return true;
     }

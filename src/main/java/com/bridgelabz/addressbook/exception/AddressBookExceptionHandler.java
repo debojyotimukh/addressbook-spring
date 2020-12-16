@@ -31,4 +31,13 @@ public class AddressBookExceptionHandler {
 
         return new ResponseEntity<>(responseDTO, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(AddressBookException.class)
+    public ResponseEntity<ResponseDTO> handleAddressBookException(AddressBookException exception) {
+        log.error(exception.getMessage());
+
+        ResponseDTO responseDTO = new ResponseDTO("Exception caught", exception.getMessage());
+
+        return new ResponseEntity<>(responseDTO, HttpStatus.EXPECTATION_FAILED);
+    }
 }
